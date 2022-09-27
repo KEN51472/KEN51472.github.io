@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="http://localhost:4000/assets/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Header -->
+<header id="header" class="alt">
+	<a href="index.html" class="logo"><strong>KEN</strong> <span>BLOG</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+        <!-- Menu -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="http://localhost:4000/_layouts/landing.html">Landing</a></li>
+        <li><a href="http://localhost:4000/_layouts/generic.html">Generic</a></li>
+        <li><a href="http://localhost:4000/_layouts/elements.html">Elements</a></li>
+    </ul>
+</nav>
+        <!-- Main -->
+<div id="main" class="alt">
+
+	<!-- One -->
+	<section id="one">
+		<div class="inner">
+			<p3><h2 id="chapter-1">CHAPTER 1</h2>
+<h2 id="communication-design-dimensions">Communication Design Dimensions</h2>
+
+<h3 id="无连接协议和面向连接协议">无连接协议和面向连接协议</h3>
+
+<p>无连接协议提供面向消息的服务，每条消息都通过独立路由传递。通常使用“尽力而为”的交付消息，不保证一系列消息将按特定顺序到达
+目的地，甚至发送的消息永远不会到达接收方处。
+广泛使用的无连接协议例子：用户数据报协议 (UDP) 和互联网协议 (IP)。
+这些协议可以是由多媒体应用程序直接使用，例如语音或者视频，可以容忍一定程度的数据丢失。 
+UDP/IP 还支持不可靠的多播和广播功能，一个发送者能够与多个接收者进行通信。</p>
+
+<p>面向连接的协议提供了可靠的、有序的、非重复的信息传输服务，用于不允许数据丢失的应用程序。
+面向协议连接在发送方和接收方之间交换信息和维护状态，提高性能并确保可靠性。
+使用面向连接协议的例子：传输控制协议 (TCP)
+在许多面向会话的网络应用程序中使用，例如 Web 服务和电子邮件。</p>
+
+<h3 id="多路复用">多路复用</h3>
+
+<p>同一线路承载多路信号，单个进程里的所有客户端请求通过一个TCP连接传输到服务端。
+它可以节省 OS 通信资源，例如套接字句柄和连接控制块
+由于连接的请求与接受需要同步和上下文切换（又称环境切换，是一个存储和重建CPU的状态，因此令多个进程可以分享单一CPU资源的计算过程。要切换CPU上的进程时，必需先行存储目前进程的状态，再将欲执行的进程之状态读回CPU中），多路复用也有编程比较困难、，效率较低、
+并且确定性较低的问题。</p>
+
+<h3 id="非多路复用">非多路复用</h3>
+
+<p>每个客户端使用不同的连接与对等服务进行通信。非复用连接的主要优点是更好地控制优先事项。
+在非复用连接设计中，每个连接的优先级可以单独设置，即使其他线程之间有大量的低优先级通信流量，高优先级的通信也能快速传输。
+这种设计避免了低优先级线程独占单个多路复用连接的优先级倒置问题。
+由于连接不是共享的，因此这种策略会产生较低的同步开销，因为不需要额外的锁来发送和接收双向请求。
+与多路复用连接策略相比，非多路复用策略使用更多的操作系统资源，因此在某些环境中可能无法很好地扩展，例如大容量互联网电子商务服务器。</p>
+
+<h3 id="同步和异步传输">同步和异步传输</h3>
+
+<p>异步请求策略可以有效利用网络，减少高延迟的影响。 
+比起同步传输采用重试策略的复杂操作，异步请求策略性能改进了很多。</p>
+
+<h3 id="消息传输和内存共享">消息传输和内存共享</h3>
+</p3>
+		</div>
+	</section>
+</div>
+        <!-- Footer -->
+<footer id="footer">
+	<div class="inner">
+		<ul class="icons">
+			<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+			<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+			<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+			<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+			<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+		</ul>
+	</div>
+</footer>
+        <!-- Scripts -->
+        <script src="http://localhost:4000/assets/js/jquery.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrolly.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrollex.min.js"></script>
+        <script src="http://localhost:4000/assets/js/browser.min.js"></script>
+        <script src="http://localhost:4000/assets/js/breakpoints.min.js"></script>
+        <script src="http://localhost:4000/assets/js/util.js"></script>
+        <script src="http://localhost:4000/assets/js/main.js"></script>
+    </div>
+</body>
+
+</html>
