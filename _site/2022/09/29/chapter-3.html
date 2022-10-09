@@ -39,16 +39,224 @@
 			<p3><h2 id="chapter-3">CHAPTER 3</h2>
 <h2 id="the-ace-socket-wrapper-facades">The ACE Socket Wrapper Facades</h2>
 
-<h3 id="ace-class">ACE Class</h3>
+<h3 id="the-ace_addr-and-ace_inet_addr-classes">The ACE_Addr and ACE_INET_Addr Classes</h3>
 
-<p>ACE_Addr
-ACE_INET_Addr
-ACE_IPC_SAP
-ACE_SOCK
-ACE_SOCK_Connector
-ACE_SOCK_IO
-ACE_SOCK_Stream
-ACE_SOCK_Acceptor</p>
+<table>
+  <thead>
+    <tr>
+      <th>ACE_Addr</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>operator == ( )</td>
+      <td style="text-align: left">比较地址是否相等</td>
+    </tr>
+    <tr>
+      <td>operator != ( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>hash( )</td>
+      <td style="text-align: left">计算地址的哈希值</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_INET_Addr</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACE_INET_Addr( )</td>
+      <td style="text-align: left">使用主机名、IP 地址、端口号初始化 ACE INET Addr</td>
+    </tr>
+    <tr>
+      <td>set( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>string_to_addr( )</td>
+      <td style="text-align: left">将 string 转换为 ACE_INET_Addr</td>
+    </tr>
+    <tr>
+      <td>addr_to_string( )</td>
+      <td style="text-align: left">将 ACE INET Addr 转换为 string</td>
+    </tr>
+    <tr>
+      <td>get_port_number( )</td>
+      <td style="text-align: left">以主机字节顺序返回端口号</td>
+    </tr>
+    <tr>
+      <td>get_host_name( )</td>
+      <td style="text-align: left">返回主机名称</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-ace_ipc_sap-class">The ACE_IPC_SAP Class</h3>
+
+<p>IPC: Inter Process Communication
+SAP: Service Access Point</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_IPC_SAP</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>enable( )</td>
+      <td style="text-align: left">启用或禁用各种 I/O 句柄选项，例如启用/禁用非阻塞 I/O</td>
+    </tr>
+    <tr>
+      <td>disable( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>set_handle( )</td>
+      <td style="text-align: left">设置和获取底层 I/O 句柄</td>
+    </tr>
+    <tr>
+      <td>get_handle( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-ace_sock-class">The ACE_SOCK Class</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_SOCK</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>open( )</td>
+      <td style="text-align: left">创建和销毁通信的套接字端点</td>
+    </tr>
+    <tr>
+      <td>close( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>get_local_addr( )</td>
+      <td style="text-align: left">返回本地和远程对等点的地址</td>
+    </tr>
+    <tr>
+      <td>get_remote_addr( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>set_option( )</td>
+      <td style="text-align: left">设置和获取套接字选项</td>
+    </tr>
+    <tr>
+      <td>get_option( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-ace_sock_connector-class">The ACE_SOCK_Connector Class</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_SOCK_Connector</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>connect( )</td>
+      <td style="text-align: left">在特定网络地址上使用阻塞、非阻塞或定时模式寻址主动连接 ACE_SOCK_Stream</td>
+    </tr>
+    <tr>
+      <td>complete( )</td>
+      <td style="text-align: left">尝试完成一个非阻塞连接并初始化一个 ACE_SOCK_Stream</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-ace_sock_io-and-ace_sock_stream-classes">The ACE_SOCK_IO and ACE_SOCK_Stream Classes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_SOCK_IO</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>send( )</td>
+      <td style="text-align: left">发送和接收数据缓冲区，可能写入或读取的字节数少于请求的字节数</td>
+    </tr>
+    <tr>
+      <td>recv( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_SOCK_Stream</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>send_n( )</td>
+      <td style="text-align: left">发送和接收正好 n 字节的数据缓冲区</td>
+    </tr>
+    <tr>
+      <td>recv_n ( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>recvv_n ( )</td>
+      <td style="text-align: left">用“分散-读取”完整接收多个数据缓冲区</td>
+    </tr>
+    <tr>
+      <td>sendv_n ( )</td>
+      <td style="text-align: left">用“收集-写入”完整发送多个数据缓冲区</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-ace_sock_acceptor-class">The ACE_SOCK_Acceptor Class</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_SOCK_Acceptor</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>open( )</td>
+      <td style="text-align: left">初始化被动模式工厂套接字，在指定的 ACE_INET_Addr 地址被动监听</td>
+    </tr>
+    <tr>
+      <td>accept( )</td>
+      <td style="text-align: left">用新接受的客户端连接初始化 ACE_SOCK_stream 参数</td>
+    </tr>
+  </tbody>
+</table>
 </p3>
 		</div>
 	</section>
