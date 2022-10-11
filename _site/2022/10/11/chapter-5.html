@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="http://localhost:4000/assets/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Header -->
+<header id="header" class="alt">
+	<a href="index.html" class="logo"><strong>KEN</strong> <span>BLOG</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+        <!-- Menu -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="http://localhost:4000/_layouts/landing.html">Landing</a></li>
+        <li><a href="http://localhost:4000/_layouts/generic.html">Generic</a></li>
+        <li><a href="http://localhost:4000/_layouts/elements.html">Elements</a></li>
+    </ul>
+</nav>
+        <!-- Main -->
+<div id="main" class="alt">
+
+	<!-- One -->
+	<section id="one">
+		<div class="inner">
+			<p3><h2 id="chapter-5">CHAPTER 5</h2>
+<h2 id="concurrency-design-dimensions">Concurrency Design Dimensions</h2>
+
+<h3 id="iterative-concurrent-and-reactive-servers">Iterative, Concurrent, and Reactive Servers</h3>
+
+<p>服务器可以分为迭代式、并发式或反应式。主要权衡涉及编程的简单性与扩展以增加服务产品和主机负载的能力。</p>
+
+<p>迭代服务器在为后续请求提供服务之前，会完整地处理每个客户端请求。因此，在处理请求时，迭代服务器要么排队要么忽略其他请求。<br />
+迭代服务器适合</p>
+<ol>
+  <li>短期服务，例如标准互联网 ECHO 和 DAYTIME 服务，具有最小的执行时间变化</li>
+  <li>不经常运行的服务，例如每晚在平台轻负载时运行的远程文件系统备份服务</li>
+</ol>
+
+<p>并发服务器同时处理来自客户端的多个请求，根据操作系统和硬件平台，并发服务器可以使用多个线程或多个进程执行其服务。如果服务器是单服务服务器，同一服务的多个副本可以同时运行。如果服务器是多服务服务器，则不同服务的多个副本也可能同时运行。</p>
+
+<p>并发服务器非常适合 I/O 密集型服务和/或需要可变时间来执行的长时间服务。与迭代服务器不同，并发服务器允许更细粒度的同步技术，在应用程序定义的级别序列化请求。这种设计需要同步机制，以确保同时运行的进程和线程之间的稳健合作和数据共享。</p>
+
+<p>反应式服务器几乎同时处理多个请求，尽管所有处理实际上都是在单个线程中完成的。在 OS 平台上广泛使用多线程之前，并发处理通常通过同步事件多路分解策略实现，其中多个服务请求由单线程进程以循环顺序处理。</p>
+
+<p>反应式服务器可以通过同步事件多路分离机制显式地对每个请求进行时间切片来实现</p>
+
+<p>使用这种技术开发的应用程序具有以下限制：</p>
+
+<ol>
+  <li>
+    <p>增加编程复杂性。某些类型的网络应用程序，例如 I/O 绑定服务器，很难使用反应式服务器模型进行编程。</p>
+  </li>
+  <li>
+    <p>降低可靠性和性能。如果单个操作失败，则整个服务器进程可能会挂起，即使整个进程没有失败，如果操作系统在一个服务调用系统函数或发生页面错误时阻塞整个进程，它的性能也会下降。</p>
+  </li>
+</ol>
+
+<h3 id="processes-versus-threads">Processes versus Threads</h3>
+
+</p3>
+		</div>
+	</section>
+</div>
+        <!-- Footer -->
+<footer id="footer">
+	<div class="inner">
+		<ul class="icons">
+			<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+			<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+			<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+			<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+			<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+		</ul>
+	</div>
+</footer>
+        <!-- Scripts -->
+        <script src="http://localhost:4000/assets/js/jquery.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrolly.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrollex.min.js"></script>
+        <script src="http://localhost:4000/assets/js/browser.min.js"></script>
+        <script src="http://localhost:4000/assets/js/breakpoints.min.js"></script>
+        <script src="http://localhost:4000/assets/js/util.js"></script>
+        <script src="http://localhost:4000/assets/js/main.js"></script>
+    </div>
+</body>
+
+</html>

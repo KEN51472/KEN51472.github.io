@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="http://localhost:4000/assets/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Header -->
+<header id="header" class="alt">
+	<a href="index.html" class="logo"><strong>KEN</strong> <span>BLOG</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+        <!-- Menu -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="http://localhost:4000/_layouts/landing.html">Landing</a></li>
+        <li><a href="http://localhost:4000/_layouts/generic.html">Generic</a></li>
+        <li><a href="http://localhost:4000/_layouts/elements.html">Elements</a></li>
+    </ul>
+</nav>
+        <!-- Main -->
+<div id="main" class="alt">
+
+	<!-- One -->
+	<section id="one">
+		<div class="inner">
+			<p3><h2 id="chapter-4">CHAPTER 4</h2>
+<h2 id="implementing-the-networked-logging-service">Implementing the Networked Logging Service</h2>
+
+<h3 id="the-ace-message-block-class">The ACE Message Block Class</h3>
+
+<p>ACE_Message_Block内部有读地址和写地址，ACE_Message_Block的长度是写地址减去读地址的值<br />
+rd_ptr()和wr_ptr()分别用于设置和获取读写地址的值<br />
+将buffer中的数据复制到ACE_Message_Block中，需要调用copy函数。copy函数内部用memcpy实现，将buf的size个BYTE拷贝到以wr_ptr_地址为首的地址上，并将wr_ptr_的值加上size<br />
+ACE_Message_Block提供了clone和duplicate两个操作，clone是深复制，duplicate是浅复制，仅为消息的引用计数加1<br />
+分别用重载函数cont()、next()、prev()来设置和获取邻居消息。其中，cont用于将复合消息连接在一起，next和prev用于连接消息链上的简单消息</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_Message Block</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACE_Message Block( )</td>
+      <td style="text-align: left">初始化消息</td>
+    </tr>
+    <tr>
+      <td>init( )</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>msg_type( )</td>
+      <td style="text-align: left">设置和获取消息类型</td>
+    </tr>
+    <tr>
+      <td>msg_priority( )</td>
+      <td style="text-align: left">设置和获取消息优先级</td>
+    </tr>
+    <tr>
+      <td>clone( )</td>
+      <td style="text-align: left">返回整个消息的精确“深复制”</td>
+    </tr>
+    <tr>
+      <td>duplicate( )</td>
+      <td style="text-align: left">返回消息的“浅复制”，将其引用计数增加 1</td>
+    </tr>
+    <tr>
+      <td>release( )</td>
+      <td style="text-align: left">将引用计数减 1，如果计数降至 0，则释放资源</td>
+    </tr>
+    <tr>
+      <td>set_flags( )</td>
+      <td style="text-align: left">将指定的位按位或与确定消息语义的现有标志集进行按位或运算(在释放消息时是否删除缓冲区等)</td>
+    </tr>
+    <tr>
+      <td>clr_flags( )</td>
+      <td style="text-align: left">清除指定的标志位</td>
+    </tr>
+    <tr>
+      <td>copy( )</td>
+      <td style="text-align: left">将 n 个字节从缓冲区复制到消息中</td>
+    </tr>
+    <tr>
+      <td>rd_ptr( )</td>
+      <td style="text-align: left">设置并获取读指针</td>
+    </tr>
+    <tr>
+      <td>wr_ptr( )</td>
+      <td style="text-align: left">设置并获取写指针</td>
+    </tr>
+    <tr>
+      <td>cont( )</td>
+      <td style="text-align: left">设置和获取消息延续字段，它将复合消息链接在一起</td>
+    </tr>
+    <tr>
+      <td>next( ) prev( )</td>
+      <td style="text-align: left">设置和获取指向ACE_Message_Queue中消息的双向链表的指针</td>
+    </tr>
+    <tr>
+      <td>length( )</td>
+      <td style="text-align: left">设置并获取消息的当前长度，wr ptr ( ) - rd ptr ( )</td>
+    </tr>
+    <tr>
+      <td>total_length()</td>
+      <td style="text-align: left">获取消息的长度，包括所有链接的消息块</td>
+    </tr>
+    <tr>
+      <td>size( )</td>
+      <td style="text-align: left">设置并获取消息的总容量，包括在 [ rd_ptr() , wr_ptr() ] 范围之前和之后分配的存储量</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int main(int argc, char *argv[])
+{
+    ACE_Message_Block *mb = new ACE_Message_Block (30);
+    ACE_OS::sprintf(mb-&gt;wr_ptr(),"%s","hello");
+    ACE_OS::printf("%s\n",mb-&gt;rd_ptr ());
+    mb-&gt;release();
+    return 0;
+}
+</code></pre></div></div>
+
+<p><a href="https://www.cnblogs.com/hgwang/p/5940168.html">参考链接</a></p>
+
+<h3 id="the-ace_inputcdr-and-ace_outputcdr-classes">The ACE_InputCDR and ACE_OutputCDR Classes</h3>
+
+<p>ACE_OutputCDR 和 ACE_InputCDR 类提供了一种高度优化、可移植和方便的方法来使用CDR格式对数据进行编组和解组。   ACE_OutputCDR 从数据结构创建 CDR 缓冲区（编组），ACE_InputCDR 从 CDR 缓冲区中提取数据（解组）。两个类有助于解析其他媒体中的传输数据以适应网络传输。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_OutputCDR</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACE_OutputCDR( )</td>
+      <td style="text-align: left">为插入创建一个空的 CDR 流</td>
+    </tr>
+    <tr>
+      <td>write_*( )</td>
+      <td style="text-align: left">将原语插入流中，例如write_ushort()</td>
+    </tr>
+    <tr>
+      <td>write_*_array( )</td>
+      <td style="text-align: left">将基元数组插入流中，例如write_long_array()</td>
+    </tr>
+    <tr>
+      <td>operator«( )</td>
+      <td style="text-align: left">为每个原始类型定义了一个插入运算符</td>
+    </tr>
+    <tr>
+      <td>good_bit( )</td>
+      <td style="text-align: left">如果流检测到错误，则返回 0</td>
+    </tr>
+    <tr>
+      <td>total_length( )</td>
+      <td style="text-align: left">返回流中的字节数</td>
+    </tr>
+    <tr>
+      <td>begin( )</td>
+      <td style="text-align: left">返回指向链中第一个消息块的指针</td>
+    </tr>
+    <tr>
+      <td>end( )</td>
+      <td style="text-align: left">返回指向链中最后一个消息块的指针</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>ACE_InputCDR</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACE_InputCDR( )</td>
+      <td style="text-align: left">创建用于提取的空 CDR 流</td>
+    </tr>
+    <tr>
+      <td>read_*( )</td>
+      <td style="text-align: left">从流中提取原语，例如，读取 char()</td>
+    </tr>
+    <tr>
+      <td>read_*_array( )</td>
+      <td style="text-align: left">从流中提取一个基元数组，例如，读取 octet_array()</td>
+    </tr>
+    <tr>
+      <td>operator»( )</td>
+      <td style="text-align: left">为每个原始类型定义了一个提取运算符</td>
+    </tr>
+    <tr>
+      <td>good_bit( )</td>
+      <td style="text-align: left">如果流检测到错误，则返回 0</td>
+    </tr>
+    <tr>
+      <td>steal_contents( )</td>
+      <td style="text-align: left">返回包含当前 CDR 流的基础ACE_Message_Block的副本</td>
+    </tr>
+  </tbody>
+</table>
+
+</p3>
+		</div>
+	</section>
+</div>
+        <!-- Footer -->
+<footer id="footer">
+	<div class="inner">
+		<ul class="icons">
+			<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+			<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+			<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+			<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+			<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+		</ul>
+	</div>
+</footer>
+        <!-- Scripts -->
+        <script src="http://localhost:4000/assets/js/jquery.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrolly.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrollex.min.js"></script>
+        <script src="http://localhost:4000/assets/js/browser.min.js"></script>
+        <script src="http://localhost:4000/assets/js/breakpoints.min.js"></script>
+        <script src="http://localhost:4000/assets/js/util.js"></script>
+        <script src="http://localhost:4000/assets/js/main.js"></script>
+    </div>
+</body>
+
+</html>
