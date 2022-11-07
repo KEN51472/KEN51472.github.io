@@ -136,11 +136,16 @@ ACE_Message_Block提供了clone和duplicate两个操作，clone是深复制，du
 }
 </code></pre></div></div>
 
+<p>可以通过 mb-&gt;wr_ptr(n) 调整指针位置</p>
+
 <p><a href="https://www.cnblogs.com/hgwang/p/5940168.html">参考链接</a></p>
 
 <h3 id="the-ace_inputcdr-and-ace_outputcdr-classes">The ACE_InputCDR and ACE_OutputCDR Classes</h3>
 
-<p>ACE_OutputCDR 和 ACE_InputCDR 类提供了一种高度优化、可移植和方便的方法来使用CDR格式对数据进行编组和解组。   ACE_OutputCDR 从数据结构创建 CDR 缓冲区（编组），ACE_InputCDR 从 CDR 缓冲区中提取数据（解组）。两个类有助于解析其他媒体中的传输数据以适应网络传输。</p>
+<p> 作用：统一不同主机不同环境的“字节序”规则，将类型化的数据和数据流相互转换。只提供原始数据类型及其数组的整编和解编。<br />
+ 原始数据类型包括：bool char int16 int32 int64 float double 字符 字符串<br />
+ ACE_OutputCDR 根据数据结构创建CDR缓冲区，将数据保存在缓冲区中-&gt;整编<br />
+ ACE_InputCDR  从CDR缓冲区中提取数据-&gt;解编</p>
 
 <table>
   <thead>
@@ -219,6 +224,11 @@ ACE_Message_Block提供了clone和duplicate两个操作，clone是深复制，du
     </tr>
   </tbody>
 </table>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ACE_InputCDR cdr(mb);
+    ACE_CDR::Long Type;
+    cdr &gt;&gt; Type;
+</code></pre></div></div>
 
 </p3>
 		</div>

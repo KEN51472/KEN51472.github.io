@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="http://localhost:4000/assets/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Header -->
+<header id="header" class="alt">
+	<a href="index.html" class="logo"><strong>KEN</strong> <span>BLOG</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+        <!-- Menu -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="http://localhost:4000/_layouts/landing.html">Landing</a></li>
+        <li><a href="http://localhost:4000/_layouts/generic.html">Generic</a></li>
+        <li><a href="http://localhost:4000/_layouts/elements.html">Elements</a></li>
+    </ul>
+</nav>
+        <!-- Main -->
+<div id="main" class="alt">
+
+	<!-- One -->
+	<section id="one">
+		<div class="inner">
+			<p3><h2 id="mysql-基础总结">MySQl 基础总结</h2>
+
+<h2 id="关系型数据库与非关系型数据库">关系型数据库与非关系型数据库</h2>
+
+<p>关系型数据库最典型的数据结构是表，由二维表及其之间的联系所组成的一个数据组织<br />
+非关系型数据库严格上不是一种数据库，应该是一种数据结构化存储方法的集合，可以是文档、键值对、列式、图形等。</p>
+
+<h2 id="sql">SQL</h2>
+
+<p>数据定义语言（Data Definition Language, DDL）(CREATE, DROP, ALTER) <br />
+数据操作语言（Data Manipulation Language，DML）(INSERT, UPDATE, DELETE)<br />
+数据查询语言（Data Query Language，DQL）(SELECT)<br />
+数据控制语言（Data Control Language，DCL）(GRANT, INVOKE, COMMIT, ROLLBACK)</p>
+
+<h2 id="修改数据表">修改数据表</h2>
+
+<p>ALTER TABLE 表名 修改选项;</p>
+
+<p>修改选项格式：
+   ADD COLUMN <列名> <类型> (first/after(xxx))
+   CHANGE COLUMN <旧列名> <新列名> <新列类型>
+   ALTER COLUMN <列名> { SET DEFAULT <默认值> | DROP DEFAULT } 改变、删除列的默认值
+   MODIFY COLUMN <列名> <类型>
+   DROP COLUMN <列名>
+   RENAME TO <新表名>
+   CHARACTER SET <字符集名>
+   COLLATE <校对规则名></校对规则名></字符集名></新表名></列名></类型></列名></默认值></列名></新列类型></新列名></旧列名></类型></列名></p>
+
+<h2 id="创建用户">创建用户</h2>
+
+<p>create user ken@localhost identified by ‘123456’;</p>
+
+<p>权限级别：
+全局权限 数据库权限 表权限 列权限 函数及存储过程权限</p>
+
+<p>权限类型：
+数据权限 结构权限 管理权限</p>
+
+<p>赋予权限及查询权限</p>
+
+<p>grant all on <em>.</em> to ken@localhost (with grant option);
+show grants for 用户;</p>
+
+<h2 id="主键外键">主键外键</h2>
+
+<p>primary key 所在的为主表
+添加外键 ：ALTER TABLE <数据表名> ADD CONSTRAINT <外键名> FOREIGN KEY(<列名>) REFERENCES <主表名> (<主键名>);</主键名></主表名></列名></外键名></数据表名></p>
+
+<h2 id="查询语句">查询语句</h2>
+
+<p>SELECT (distinct) * FROM &lt;表 1&gt;, &lt;表 2&gt; 
+WHERE
+GROUP BY 
+HAVING 
+ORDER BY  (ASC 升序/DESC 降序)
+LIMIT</p>
+
+<p>模糊查询 ： where <字段> like '%xxxx%'</字段></p>
+
+<p>where 和 having之后都是筛选条件，但是有区别的：</p>
+
+<p>1.where在group by前， having在group by 之后</p>
+
+<p>2.聚合函数（avg、sum、max、min、count），不能作为条件放在where之后，但可以放在having之后</p>
+
+<p>limit 5 显示5条数据<br />
+limit 3, 5 = limit 5 offset 3 = 从第4条开始显示5条数</p>
+
+<p>左链接 ：SELECT <字段名> FROM <表1> LEFT JOIN <表2></表2></表1></字段名></p>
+
+<p>子查询 ： SELECT <字段名> FROM <表1> WHERE <表达式> IN (SELECT)</表达式></表1></字段名></p>
+
+<h2 id="插入语句">插入语句</h2>
+
+<p>INSERT INTO <表名> (列名) VALUES (值)</表名></p>
+
+<h2 id="修改语句">修改语句</h2>
+
+<p>UPDATE <表名> SET 字段 = 值 WHERE ORDER BY LIMIT 子句</表名></p>
+
+<h2 id="删除语句">删除语句</h2>
+
+<p>DELETE FROM <表名> WHERE ORDER BY  LIMIT 子句</表名></p>
+
+<h2 id="视图">视图</h2>
+
+<p>CREATE VIEW <视图名> AS <SELECT语句></SELECT语句></视图名></p>
+
+<p>DESCRIBE <视图名> 查看字段信息</视图名></p>
+
+<p>SHOW CREATE VIEW <视图名> 查看详细定义</视图名></p>
+
+<p>使用视图 ： SELECT * FROM <视图名></视图名></p>
+
+<h2 id="存储过程">存储过程</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use employees;
+DELIMITER //
+CREATE PROCEDURE GetEmpSal (IN emp_name VARCHAR(30))
+BEGIN
+    SELECT e.emp_no,e.first_name,e.last_name,s.salary,
+    s.from_date,s.to_date FROM employees.salaries s,employees.employees e 
+    where s.emp_no=e.emp_no and concat(e.last_name," ",e.first_name) = 
+    emp_name order by s.from_date desc; 
+END //
+DELIMITER ;
+</code></pre></div></div>
+
+<p>调用 ：call GetEmpSal(‘Bamford Parto’);</p>
+
+<p>查看 ：show create procedure getempsal;</p>
+
+<p>调用存储过程的用户：INVOKER, 定义（默认为创建者）存储过程的用户：DEFINER</p>
+
+<p>Invoker必须有Execute权限</p>
+
+<p>默认存储过程的执行特性为SQL SECURITY DEFINER</p>
+
+<h2 id="变量">变量</h2>
+
+<p>定义 ：DECLARE 变量名 类型 DEFAULT 值</p>
+
+<p>修改 ：set 变量名 = 值</p>
+
+<p>SELECT col_name INTO var_name FROM table_name WEHRE condition</p>
+
+<p>定义 ERROR 1146 (42S02) 为 can_not_find :</p>
+
+<p>DECLARE can_not_find CONDITION FOR SQLSTATE ‘42S02’;</p>
+
+<p>DECLARE can_not_find CONDITION FOR 1146;</p>
+
+<p>定义处理程序：</p>
+
+<p>DECLARE handler_type HANDLER FOR condition_value</p>
+
+<p>handler_type：</p>
+
+<ol>
+  <li>
+    <p>CONTINUE 表示遇到错误不进行处理，继续向下执行；</p>
+  </li>
+  <li>
+    <p>EXIT 表示遇到错误后马上退出；</p>
+  </li>
+  <li>
+    <p>UNDO 表示遇到错误后撤回之前的操作</p>
+  </li>
+</ol>
+
+<p>SQLWARNING 捕获所有以 01 开头的 sqlstate_value 值</p>
+
+<p>NOT FOUND 捕获所有以 02 开头的 sqlstate_value 值</p>
+
+<p>SQLEXCEPTION 捕获所有没有被 SQLWARNING 或 NOT FOUND 捕获的 sqlstate_value 值</p>
+
+<h2 id="流程控制">流程控制</h2>
+
+<p>if … then …<br />
+else if …. then …<br />
+else …<br />
+end if</p>
+
+<p>case …<br />
+when … then …<br />
+else …<br />
+end case</p>
+
+<p>[begin_label:]LOOP<br />
+    ……<br />
+END LOOP [end_label]</p>
+
+<p>[begin_label:] REPEAT<br />
+    ……<br />
+    UNTIL …<br />
+END REPEAT [end_label]</p>
+
+<p>[begin_label:] WHILE … DO<br />
+    ……<br />
+END WHILE [end label]</p>
+
+<p>leave 跳出循环</p>
+
+<p>iterate 跳出本次循环</p>
+
+<h2 id="函数">函数</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELIMITER //
+CREATE FUNCTION GetEmpNo (para_emp_name VARCHAR(50))
+RETURNS VARCHAR(50) DETERMINISTIC
+COMMENT 'search emp number'
+BEGIN
+    RETURN( SELECT e.emp_no FROM employees.employees e where concat(e.last_name," ",e.first_name)=para_emp_name ); 
+END //
+DELIMITER ;
+</code></pre></div></div>
+
+<h2 id="触发器">触发器</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELIMITER $
+create trigger tri_stuInsert after insert
+on student for each row
+begin
+declare c int;
+set c = (select stuCount from class where classID=new.classID);
+update class set stuCount = c + 1 where classID = new.classID;
+end$
+DELIMITER ;
+</code></pre></div></div>
+</p3>
+		</div>
+	</section>
+</div>
+        <!-- Footer -->
+<footer id="footer">
+	<div class="inner">
+		<ul class="icons">
+			<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+			<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+			<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+			<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+			<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+		</ul>
+	</div>
+</footer>
+        <!-- Scripts -->
+        <script src="http://localhost:4000/assets/js/jquery.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrolly.min.js"></script>
+        <script src="http://localhost:4000/assets/js/jquery.scrollex.min.js"></script>
+        <script src="http://localhost:4000/assets/js/browser.min.js"></script>
+        <script src="http://localhost:4000/assets/js/breakpoints.min.js"></script>
+        <script src="http://localhost:4000/assets/js/util.js"></script>
+        <script src="http://localhost:4000/assets/js/main.js"></script>
+    </div>
+</body>
+
+</html>
