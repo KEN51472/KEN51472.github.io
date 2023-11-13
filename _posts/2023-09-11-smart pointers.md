@@ -1,9 +1,9 @@
 ---
 layout: detail
-type : 5
+type : 2
 keyword : 智能指针
 title: 智能指针
-description: 
+description: smart pointers
 ---
 
 ## smart pointers
