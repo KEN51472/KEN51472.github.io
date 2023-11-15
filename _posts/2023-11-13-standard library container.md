@@ -55,7 +55,7 @@ unordered_map是基于哈希表实现的，它不保持元素的顺序，因此�
 #include <iostream>
 
 int main() {
-    std::map<std::string, int> myMap = {{"Alice", 25}, {"Bob", 30}, {"Charlie", 20}};
+    std::map<std::string, int> myMap = {{"A", 25}, {"B", 30}, {"C", 20}};
     myMap["David"] = 28; // 插入键值对
     std::cout << myMap["Bob"] << std::endl; // 查找操作
     return 0;
