@@ -1,8 +1,8 @@
 ---
 layout: detail
 type : 2
-keyword : Multiple Return Values
-title: Multiple Return Values
+keyword : Templates
+title: Templates
 description: 
 ---
 
