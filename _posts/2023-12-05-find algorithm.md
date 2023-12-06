@@ -2,7 +2,7 @@
 layout: detail
 type : 2
 keyword :     
-title: tree
+title: find algorithm
 description: 
 ---
 
@@ -77,6 +77,35 @@ int main() {
 ```
 
 使用C++的unordered_map来实现哈希表，然后将一些键值对存储在哈希表中。使用哈希查找来查找目标元素target。哈希查找的关键在于通过哈希函数将关键字映射到哈希表的位置，然后直接在该位置查找元素。
+
+使用自定义类型作为 unordered_map 的键时，需要提供自定义的哈希函数和相等比较函数，以确保正确的哈希值计算和键的比较操作。例如：
+
+```c
+struct MyKey {
+    std::string name;
+    int age;
+};
+
+struct MyKeyHash {
+    std::size_t operator()(const MyKey& k) const {
+        return std::hash<std::string>()(k.name) ^ (std::hash<int>()(k.age) << 1);
+    }
+};
+
+struct MyKeyEqual {
+    bool operator()(const MyKey& lhs, const MyKey& rhs) const {
+        return lhs.name == rhs.name && lhs.age == rhs.age;
+    }
+};
+
+int main() {
+    std::unordered_map<MyKey, int, MyKeyHash, MyKeyEqual> myMap;
+
+    // 插入和查找操作同上
+}
+
+```
+定义了自定义类型 MyKey 作为 unordered_map 的键，并提供了自定义的哈希函数 MyKeyHash 和相等比较函数 MyKeyEqual。这样就可以使用自定义类型作为键来操作 unordered_map。
 
 时间复杂度：在理想情况下，哈希查找的时间复杂度是O(1)，即常数时间。但在存在哈希冲突的情况下，时间复杂度可能会上升，但通常仍然是O(1)级别。
 空间复杂度：哈希表的空间复杂度取决于哈希表的大小和元素的数量，通常情况下是O(n)。
