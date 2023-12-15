@@ -132,6 +132,7 @@ std::make_shared 相较于直接使用 std::shared_ptr 的方式有几个优点�
 
 解决shared_ptr因为循环引用导致的析构未正确调用的问题
 使用weak_ptr后，A拥有B但B不拥有A，
+
 ```c
 #include <memory>
 #include <iostream>

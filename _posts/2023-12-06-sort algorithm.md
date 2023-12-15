@@ -27,6 +27,7 @@ void bubbleSort(int arr[], int n) {
 
 归并排序（Merge Sort）: 
 一种分治算法，它将待排序的序列分成两个子序列，分别进行排序，然后将两个已排序的子序列合并成一个有序序列。
+
 ```c
 // 合并两个已排序的子数组
 void merge(int arr[], int l, int m, int r) {
@@ -38,6 +39,7 @@ void merge(int arr[], int l, int m, int r) {
     for (int i = 0; i < n1; i++) {
         L[i] = arr[l + i]; // 将数据复制到临时数组中
     }
+
     for (int j = 0; j < n2; j++) {
         R[j] = arr[m + 1 + j]; // 将数据复制到临时数组中
     }
@@ -61,6 +63,7 @@ void merge(int arr[], int l, int m, int r) {
         i++;
         k++;
     }
+
     while (j < n2) {
         arr[k] = R[j];
         j++;
@@ -89,25 +92,26 @@ void mergeSort(int arr[], int l, int r) {
 快速排序（Quick Sort）: 
 一种分治算法，选择一个基准元素，将序列分成两部分，小于基准元素的放在左边，大于基准元素的放在右边，然后对左右两部分分别进行排序。
 ```c
+// 分区函数，用于选择一个基准值并将数组分成两部分
 int partition(int arr[], int low, int high) {
-    int pivot = arr[high];
-    int i = low - 1;
+    int pivot = arr[high]; // 选择最后一个元素作为基准值
+    int i = low - 1; // 初始化 i 为 low-1
     for (int j = low; j <= high - 1; j++) {
         if (arr[j] < pivot) {
             i++;
-            std::swap(arr[i], arr[j]);
+            std::swap(arr[i], arr[j]); // 如果当前元素小于基准值，则将其交换到左侧
         }
-    }
-
-    std::swap(arr[i + 1], arr[high]);
-    return i + 1;
+    }q
+    std::swap(arr[i + 1], arr[high]); // 将基准值交换到正确的位置
+    return i + 1; // 返回基准值的索引
 }
 
+// 快速排序函数
 void quickSort(int arr[], int low, int high) {
     if (low < high) {
-        int pi = partition(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+        int pi = partition(arr, low, high); // 对数组进行分区操作
+        quickSort(arr, low, pi - 1); // 递归地对左侧子数组进行快速排序
+        quickSort(arr, pi + 1, high); // 递归地对右侧子数组进行快速排序
     }
 }
 
