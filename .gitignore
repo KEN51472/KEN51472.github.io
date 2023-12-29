@@ -1,2 +1,3 @@
-
+.gitignore
 _posts/workspace.code-workspace
+_site
