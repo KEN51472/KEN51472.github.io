@@ -53,18 +53,18 @@ Secret: xxxx
 `env | grep -E 'http_proxy|https_proxy'`
 
 网络代理设置   
-![网络代理设置](../../../pics/24_01_08_1.png)
+<img src="../../../pics/24_01_08_1.png" alt="Description of the image" style="max-width:100%">
 
 ## Clash Dashboard
 
 打开 http://localhost:9090/ui/   
 
-![CLash Dashboard页面1](../../../pics/24_01_08_2.png)
+<img src="../../../pics/24_01_08_2.png" alt="Description of the image" style="max-width:80%">
 
 secret处输入脚本运行时输出的secret码
 
 成功后页面   
-![CLash Dashboard页面2](../../../pics/24_01_08_3.png)
+<img src="../../../pics/24_01_08_3.png" alt="Description of the image" style="max-width:70%">
 
 
 ## 相关链接
