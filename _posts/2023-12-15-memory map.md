@@ -58,3 +58,22 @@ int main() {
 ```
 
 使用 memory map 的时候需要小心处理数据的一致性和同步问题
+
+## mmap 方法参数
+```c
+void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
+```
+
+addr：指定映射区域的开始地址，通常设为0，表示由系统自动选择地址
+length：指定映射区域的长度，以字节为单位
+prot：指定映射区域的保护方式，可选：
+PROT_READ：映射区域可读
+PROT_WRITE：映射区域可写
+PROT_EXEC：映射区域可执行
+PROT_NONE：映射区域不可访问
+flags：指定映射区域的属性，可选：
+MAP_SHARED：映射区域会与文件关联，对映射区域的写入会直接反映到文件中
+MAP_PRIVATE：创建一个新的私有映射区域，对映射区域的写入不会反映到文件中
+MAP_ANONYMOUS：映射一个匿名映射区域，不与文件关联
+fd：指定要映射的文件描述符，如果是匿名映射，则为-1
+offset：指定文件映射的偏移量，通常设为0

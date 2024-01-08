@@ -46,7 +46,3 @@ std::tuple<int, double> myFunction() {
     return std::make_tuple(10, 3.14);
 }
 ```
-
-
-
-
