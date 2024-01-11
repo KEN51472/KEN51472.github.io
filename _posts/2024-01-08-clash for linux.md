@@ -53,25 +53,20 @@ Secret: xxxx
 `env | grep -E 'http_proxy|https_proxy'`
 
 网络代理设置   
-<img src="../../../pics/24_01_08_1.png" alt="Description of the image" style="max-width:100%">
+<img src="/pics/24_01_08_1.png" alt="Description of the image" style="max-width:100%">
 
 ## Clash Dashboard
 
 打开 http://localhost:9090/ui/   
 
-<img src="../../../pics/24_01_08_2.png" alt="Description of the image" style="max-width:80%">
-
+<img src="/pics/24_01_08_2.png" alt="Description of the image" style="max-width:80%">
+                                             
 secret处输入脚本运行时输出的secret码
 
 成功后页面   
-<img src="../../../pics/24_01_08_3.png" alt="Description of the image" style="max-width:70%">
+<img src="/pics/24_01_08_3.png" alt="Description of the image" style="max-width:70%">
 
 
 ## 相关链接
 
 [配置教程](https://www.chenhaifei.com/?p=2005)  
-
-
-
-
-
